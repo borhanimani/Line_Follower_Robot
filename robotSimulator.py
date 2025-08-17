@@ -5,7 +5,7 @@ import numpy as np
 import threading
 
 # Serial settings (adjust COM port and baud rate)
-SERIAL_PORT = 'COM11'
+SERIAL_PORT = 'COM6'
 BAUD_RATE = 78600
 
 # Robot physical parameters (in pixels)
@@ -24,13 +24,13 @@ SENSOR_POSITIONS = [
 ]  # 5 sensors left to right
 
 # Load map image (black line on white background)
-MAP = cv2.imread('track.bmp', cv2.IMREAD_GRAYSCALE)
+MAP = cv2.imread('track_easy.bmp', cv2.IMREAD_GRAYSCALE)
 MAP_COLOR = cv2.cvtColor(MAP, cv2.COLOR_GRAY2BGR)
 
 
 
 # Initial robot state
-x, y, angle = 100, 100, 0  # pixels, radians
+x, y, angle = 60, 65, 0  # pixels, radians
 left_encoder = 0
 right_encoder = 0
 
