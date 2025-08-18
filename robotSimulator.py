@@ -30,9 +30,20 @@ MAP_COLOR = cv2.cvtColor(MAP, cv2.COLOR_GRAY2BGR)
 
 
 # Initial robot state
-x, y, angle = 60, 65, 0  # pixels, radians
+x, y, angle = 100, 100, 0  # pixels, radians
 left_encoder = 0
 right_encoder = 0
+
+# Find coordinates of black pixels (value == 0)
+black_pixels = np.argwhere(MAP == 0)
+
+if black_pixels.size > 0:
+    # Since np.argwhere returns in row-major order (top to bottom, left to right),
+    # the first element is the top-left-most black pixel
+    y, x = black_pixels[0]
+    print(f"First black pixel found at (x={x}, y={y}) , {black_pixels[0]}")
+else:
+    print("No black pixels found.")
 
 # Lock for thread safety
 lock = threading.Lock()
@@ -114,6 +125,7 @@ while True:
     if key == 27:
         break
     if key == 48:
-        x, y, angle = 100, 100, 0 
+        y, x = black_pixels[0]
+        angle = 0 
 
 cv2.destroyAllWindows()
